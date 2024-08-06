@@ -17,6 +17,12 @@ const data = [
     location: "Work",
     destination: "Irvine, California, USA",
   },
+  {
+    id: "789",
+    icon: "fast-food",
+    location: "Restaurants",
+    destination: "Brea, California, USA",
+  },
 ];
 
 //Favorite Routes or Often Visted

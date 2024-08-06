@@ -10,8 +10,12 @@ import tw from "tailwind-react-native-classnames";
 import { Icon } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
 import Map from "../components/Map";
+import { createStackNavigator } from "@react-navigation/stack";
+import EatsOptionsCard from "../eatscomponents/EatsOptionsCard";
+import EatsNavigateCard from "../eatscomponents/EatsNavigateCard";
 
 const EatsScreen = () => {
+  const Stack = createStackNavigator();
   const navigation = useNavigation();
   return (
     <View>
@@ -21,10 +25,17 @@ const EatsScreen = () => {
       >
         <Icon name="menu" />
       </TouchableOpacity>
-      <View style={tw`h-1/2`}>
-        <Map />
+      <View style={tw`h-full`}>
+        <Stack.Navigator>
+          <Stack.Screen
+            name="EatsOptions"
+            component={EatsOptionsCard}
+            options={{
+              headerShown: false,
+            }}
+          />
+        </Stack.Navigator>
       </View>
-      <View style={tw`h-1/2`}></View>
     </View>
   );
 };

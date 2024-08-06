@@ -8,25 +8,19 @@ import {
 import React from "react";
 import tw from "tailwind-react-native-classnames";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
-import { GOOGLE_MAPS_APIKEY } from "@env";
-import { useDispatch } from "react-redux";
 import { setDestination } from "../slices/navSlice";
 import { useNavigation } from "@react-navigation/native";
-import NavFavourties from "./NavFavourties";
+import { GOOGLE_MAPS_APIKEY } from "@env";
+import { useDispatch } from "react-redux";
+import NavFavourties from "../components/NavFavourties";
 import { Icon } from "react-native-elements";
 
-//1. Top screen is the Map & Bottom is the NavigateCard.
-//2. GoodMorning Message & Input of your 'Where to' location
-//3. After giving the 'Where to' location, the screen will be directed to RideOptionsCard'
-
-const NavigateCard = () => {
-  const dispatch = useDispatch();
+const EatsNavigateCard = () => {
   const navigation = useNavigation();
-
+  const dispatch = useDispatch();
   return (
     <SafeAreaView style={tw`flex-1 bg-white`}>
-      <Text style={tw`text-center py-5 text-xl`}>Good Morning, Manny</Text>
-      <View style={tw`border-t border-gray-200`}>
+      <View style={tw`border-gray-200`}>
         <View>
           <GooglePlacesAutocomplete
             styles={toInputBoxStyles}
@@ -41,7 +35,7 @@ const NavigateCard = () => {
                   description: data.description,
                 })
               );
-              navigation.navigate("RideOptionsCard");
+              navigation.navigate("EatsOptionsCard");
             }}
             enablePoweredByContainer={false}
             query={{
@@ -54,25 +48,30 @@ const NavigateCard = () => {
         </View>
         <NavFavourties />
       </View>
-
-      <View
-        style={tw`flex-row bg-white justify-evenly py-2  border-t border-gray-100`}
-      >
+      <View style={tw`flex-row justify-evenly py-2 border-t border-gray-100`}>
         <TouchableOpacity
-          style={tw`flex flex-row justify-between bg-black w-24 px-4 py-3 rounded-full`}
-          onPress={() => {
-            navigation.navigate("RideOptionsCard");
-          }}
+          style={tw`flex flex-row justify-between w-24 px-4 py-3 rounded-full bg-black`}
         >
-          <Icon name="car" type="font-awesome" color="white" size={16} />
-          <Text style={tw`text-white text-center`}>Rides</Text>
+          <Icon
+            name="fast-food-outline"
+            type="ionicon"
+            color="white"
+            size={16}
+          />
+          <Text style={tw`text-center text-white`}>Delivery</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={tw`flex flex-row justify-between w-24 px-4 py-3 rounded-full `}
+        >
+          <Icon name="fast-food-outline" type="ionicon" size={16} />
+          <Text style={tw`text-center`}>Pickup</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
 };
 
-export default NavigateCard;
+export default EatsNavigateCard;
 
 const toInputBoxStyles = StyleSheet.create({
   container: {
